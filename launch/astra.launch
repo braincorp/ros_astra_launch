@@ -39,6 +39,7 @@
        tree. Useful if you are playing back recorded raw data from a bag, or are
        supplying a more accurate tf tree from calibration. -->
   <arg name="load_driver" default="true" />
+  <arg name="process_depth" default="false" />
   <arg name="publish_tf" default="true" />
   <!-- Processing Modules -->
   <arg name="rgb_processing"                  default="true"  />
@@ -93,7 +94,8 @@
     </include>
 
     <!-- Load standard constellation of processing nodelets -->
-    <include file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
+    <include if="$(arg process_depth)"
+             file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
       <arg name="manager"                         value="$(arg manager)" />
       <arg name="rgb"                             value="$(arg rgb)" />
       <arg name="ir"                              value="$(arg ir)" />
